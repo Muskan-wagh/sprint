@@ -16,7 +16,14 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json({ projects: projects || [] });
+    const formattedProjects = (projects || []).map((p: any) => ({
+      ...p,
+      features: p.features ? JSON.parse(p.features) : [],
+      tech_stack: p.tech_stack ? JSON.parse(p.tech_stack) : [],
+      roadmap: p.roadmap ? JSON.parse(p.roadmap) : [],
+    }));
+
+    return NextResponse.json({ projects: formattedProjects });
   } catch (error) {
     console.error('Error fetching projects:', error);
     return NextResponse.json(
@@ -33,13 +40,12 @@ export async function POST(request: NextRequest) {
     const project = {
       domain: body.domain,
       title: body.title,
-      problem: body.problem,
-      usefulness: body.usefulness,
+      idea: body.problem,
       problem_statement: body.problem_statement,
-      features: body.features,
-      tech_stack: body.tech_stack,
-      roadmap: body.roadmap,
-      pitch_script: body.pitch_script,
+      features: body.features ? JSON.stringify(body.features) : null,
+      tech_stack: body.tech_stack ? JSON.stringify(body.tech_stack) : null,
+      roadmap: body.roadmap ? JSON.stringify(body.roadmap) : null,
+      pitch: body.pitch_script,
     };
 
     const { data, error } = await supabase
