@@ -13,7 +13,7 @@ export default function IdeaGenerator() {
   const router = useRouter();
   const [domain, setDomain] = useState('');
   const [customPrompt, setCustomPrompt] = useState('');
-  const [model, setModel] = useState('nvidia/nemotron-nano-12b-v2-vl:free');
+  const [model, setModel] = useState('nvidia/nemotron-3-nano-30b-a3b:free');
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [selectedIdea, setSelectedIdea] = useState<Idea | null>(null);
   const [loading, setLoading] = useState(false);

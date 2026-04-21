@@ -17,7 +17,7 @@ function StructureContent() {
   const usefulness = searchParams.get('usefulness') || '';
 
   const [customPrompt, setCustomPrompt] = useState('');
-  const [model, setModel] = useState('nvidia/nemotron-nano-12b-v2-vl:free');
+  const [model, setModel] = useState('nvidia/nemotron-3-nano-30b-a3b:free');
   const [structure, setStructure] = useState<{
     problem_statement: string;
     features: string[];

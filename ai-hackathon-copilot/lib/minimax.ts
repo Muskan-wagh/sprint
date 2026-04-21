@@ -7,13 +7,13 @@ export interface ChatMessage {
 }
 
 export const AI_MODELS = [
-  { id: 'nvidia/nemotron-nano-12b-v2-vl:free', name: 'Nemotron Nano 12B (Free)' },
+  { id: 'nvidia/nemotron-3-nano-30b-a3b:free', name: 'Nemotron 3 Nano 30B (Free)' },
   { id: 'minimax/minimax-m2.5:free', name: 'MiniMax M2.5 (Free)' },
 ];
 
 export async function callMinimax(
   messages: ChatMessage[],
-  model: string = 'nvidia/nemotron-nano-12b-v2-vl:free'
+  model: string = 'nvidia/nemotron-3-nano-30b-a3b:free'
 ): Promise<string> {
   const response = await fetch(`${MINIMAX_BASE_URL}/chat/completions`, {
     method: 'POST',
