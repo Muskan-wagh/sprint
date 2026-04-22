@@ -1,7 +1,6 @@
 import { Hero } from '@/components/custom/hero';
 import { HowItWorks } from '@/components/custom/steps';
 import { DemoPreview } from '@/components/custom/demo';
-import { Cta } from '@/components/custom/cta';
 import { Navigation } from '@/components/Navigation';
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
       <Hero />
       <HowItWorks />
       <DemoPreview />
-      <Cta />
       <footer className="py-12 border-t border-gray-100 text-center">
         <p className="text-gray-400 text-sm">
           © 2026 Sanctuary AI. Crafted for serenity.

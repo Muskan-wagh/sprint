@@ -1,63 +1,34 @@
-'use client';
-
-import { useEffect, useState, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { DashboardLayout } from '@/components/DashboardLayout';
-import { ArrowLeft, Check, Calendar, Tag, GitBranch, Lightbulb, MessageSquare, User, Trash2, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { DashboardLayout } from '@/components/DashboardLayout';
+import { ArrowLeft, Check, Calendar, GitBranch, Lightbulb, MessageSquare, User, ExternalLink } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 import type { Project } from '@/types';
 
-function ProjectDetailsContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const projectId = searchParams.get('id');
-  
-  const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
+async function getProject(id: string): Promise<Project | null> {
+  const { data: project, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('id', id)
+    .single();
 
-  useEffect(() => {
-    if (projectId) {
-      fetchProject();
-    } else {
-      setLoading(false);
-    }
-  }, [projectId]);
+  if (error || !project) return null;
 
-  async function fetchProject() {
-    try {
-      const res = await fetch(`/api/projects/${projectId}`);
-      const data = await res.json();
-      if (data.project) {
-        setProject(data.project);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  return {
+    ...project,
+    features: project.features ? JSON.parse(project.features) : [],
+    tech_stack: project.tech_stack ? JSON.parse(project.tech_stack) : [],
+    roadmap: project.roadmap ? JSON.parse(project.roadmap) : [],
+  };
+}
 
-  function formatDate(dateString: string) {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
-  }
-
-  if (loading) {
-    return (
-      <DashboardLayout>
-        <div className="p-8 flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">
-            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-gray-500">Loading project...</p>
-          </div>
-        </div>
-      </DashboardLayout>
-    );
-  }
+export default async function ProjectDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const id = await params.id;
+  const project = await getProject(id);
 
   if (!project) {
     return (
@@ -69,10 +40,10 @@ function ProjectDetailsContent() {
           </Link>
           <div className="card p-12 text-center">
             <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-              <Tag className="w-8 h-8 text-gray-400" />
+              <Calendar className="w-8 h-8 text-gray-400" />
             </div>
             <h2 className="text-xl font-bold text-gray-900 mb-2">Project not found</h2>
-            <p className="text-gray-500 mb-6">This project may have been deleted or doesn't exist.</p>
+            <p className="text-gray-500 mb-6">This project may have been deleted or doesn&apos;t exist.</p>
             <Link href="/dashboard" className="btn-primary inline-flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Dashboard
@@ -83,16 +54,23 @@ function ProjectDetailsContent() {
     );
   }
 
+  function formatDate(dateString: string) {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  }
+
   return (
     <DashboardLayout>
       <div className="p-8">
-        {/* Breadcrumb */}
         <Link href="/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-primary mb-8">
           <ArrowLeft className="w-4 h-4" />
           Back to Dashboard
         </Link>
 
-        {/* Header */}
         <div className="flex items-start justify-between mb-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -112,9 +90,7 @@ function ProjectDetailsContent() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Problem & Solution */}
             <div className="card">
               <div className="p-6 border-b border-gray-100">
                 <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -134,7 +110,6 @@ function ProjectDetailsContent() {
               </div>
             </div>
 
-            {/* Features */}
             <div className="card">
               <div className="p-6 border-b border-gray-100">
                 <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -144,7 +119,7 @@ function ProjectDetailsContent() {
               </div>
               <div className="p-6">
                 <ul className="space-y-3">
-                  {(project.features || []).map((feature, i) => (
+                  {project.features?.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                         <Check className="w-3 h-3 text-primary" />
@@ -159,7 +134,6 @@ function ProjectDetailsContent() {
               </div>
             </div>
 
-            {/* Tech Stack */}
             <div className="card">
               <div className="p-6 border-b border-gray-100">
                 <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -169,7 +143,7 @@ function ProjectDetailsContent() {
               </div>
               <div className="p-6">
                 <div className="flex flex-wrap gap-2">
-                  {(project.tech_stack || []).map((tech, i) => (
+                  {project.tech_stack?.map((tech, i) => (
                     <span key={i} className="px-3 py-1.5 bg-gray-100 rounded-lg text-sm font-medium text-gray-700">
                       {tech}
                     </span>
@@ -181,7 +155,6 @@ function ProjectDetailsContent() {
               </div>
             </div>
 
-            {/* Roadmap */}
             <div className="card">
               <div className="p-6 border-b border-gray-100">
                 <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -191,7 +164,7 @@ function ProjectDetailsContent() {
               </div>
               <div className="p-6">
                 <ol className="space-y-4">
-                  {(project.roadmap || []).map((item, i) => (
+                  {project.roadmap?.map((item, i) => (
                     <li key={i} className="flex items-start gap-4">
                       <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shrink-0 font-bold">
                         {i + 1}
@@ -206,7 +179,6 @@ function ProjectDetailsContent() {
               </div>
             </div>
 
-            {/* Pitch Script */}
             <div className="card">
               <div className="p-6 border-b border-gray-100">
                 <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -228,9 +200,7 @@ function ProjectDetailsContent() {
             </div>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
-            {/* Quick Actions */}
             <div className="card !p-0 overflow-hidden sticky top-28">
               <div className="p-5 border-b border-gray-100 bg-gray-50/50">
                 <h2 className="font-semibold text-gray-900">Quick Actions</h2>
@@ -253,7 +223,6 @@ function ProjectDetailsContent() {
               </div>
             </div>
 
-            {/* Project Summary */}
             <div className="card !p-0 overflow-hidden">
               <div className="p-5 border-b border-gray-100 bg-gray-50/50">
                 <h2 className="font-semibold text-gray-900">Project Summary</h2>
@@ -281,26 +250,5 @@ function ProjectDetailsContent() {
         </div>
       </div>
     </DashboardLayout>
-  );
-}
-
-function LoadingFallback() {
-  return (
-    <DashboardLayout>
-      <div className="p-8 flex items-center justify-center min-h-[50vh]">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-500">Loading...</p>
-        </div>
-      </div>
-    </DashboardLayout>
-  );
-}
-
-export default function ProjectDetailsPage() {
-  return (
-    <Suspense fallback={<LoadingFallback />}>
-      <ProjectDetailsContent />
-    </Suspense>
   );
 }
