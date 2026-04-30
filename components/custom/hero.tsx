@@ -10,16 +10,17 @@ export function Hero() {
           AI-Powered Serenity
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-8 max-w-4xl leading-[1.1] tracking-tight">
-          <span className="text-primary">Natural Intelligence.</span>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 max-w-4xl leading-[1.1] tracking-tight">
+          <span className="text-primary">Where AI Meets Clarity.</span>
         </h1>
 
         <p className="text-lg md:text-xl text-gray-500 max-w-2xl mb-12 leading-relaxed">
-          Experience a digital sanctuary designed to amplify your creativity and simplify your complexity. No noise, just pure execution.
+          Experience a digital sanctuary designed to amplify your creativity and
+          simplify your complexity.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-6">
-          <Link href="/idea" className="btn-primary px-8 py-4 text-lg">
+          <Link href="/get-started" className="btn-primary px-8 py-4 text-lg">
             Get Started for Free
           </Link>
           <button className="inline-flex items-center gap-2 text-gray-700 font-semibold hover:text-primary transition-colors group">

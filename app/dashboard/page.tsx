@@ -133,7 +133,7 @@ export default function DashboardPage() {
                       </span>
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{project.title}</h3>
-                    <p className="text-sm text-gray-500 line-clamp-2 mb-4">{project.problem}</p>
+                    <p className="text-sm text-gray-500 line-clamp-2 mb-4">{project.problem || project.idea}</p>
                     
                     <div className="flex items-center gap-2 flex-wrap mb-4">
                       {(project.tech_stack || []).slice(0, 3).map((tech, i) => (

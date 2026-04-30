@@ -6,28 +6,48 @@ import { supabase } from '@/lib/supabase';
 import type { Project } from '@/types';
 
 async function getProject(id: string): Promise<Project | null> {
-  const { data: project, error } = await supabase
+  // Try as string first (Supabase handles bigint as string)
+  let { data: project, error } = await supabase
     .from('projects')
     .select('*')
     .eq('id', id)
     .single();
 
-  if (error || !project) return null;
+  // If not found, try as number
+  if (error || !project) {
+    const numericId = parseInt(id, 10);
+    const result = await supabase
+      .from('projects')
+      .select('*')
+      .eq('id', numericId)
+      .single();
+    project = result.data;
+    error = result.error;
+  }
+
+  if (error || !project) {
+    console.log('Project not found, error:', error);
+    return null;
+  }
 
   return {
     ...project,
+    problem: project.idea || '',
+    usefulness: project.problem_statement || '',
+    problem_statement: project.problem_statement || '',
     features: project.features ? JSON.parse(project.features) : [],
     tech_stack: project.tech_stack ? JSON.parse(project.tech_stack) : [],
     roadmap: project.roadmap ? JSON.parse(project.roadmap) : [],
+    pitch_script: project.pitch || '',
   };
 }
 
 export default async function ProjectDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id = await params.id;
+  const { id } = await params;
   const project = await getProject(id);
 
   if (!project) {
@@ -105,7 +125,7 @@ export default async function ProjectDetailsPage({
                 </div>
                 <div>
                   <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">The Solution</h3>
-                  <p className="text-gray-700">{project.usefulness}</p>
+                  <p className="text-gray-700">{project.problem_statement || project.usefulness}</p>
                 </div>
               </div>
             </div>
@@ -207,14 +227,14 @@ export default async function ProjectDetailsPage({
               </div>
               <div className="p-3 space-y-2">
                 <Link 
-                  href={`/pitch?title=${encodeURIComponent(project.title)}&problem=${encodeURIComponent(project.problem)}&usefulness=${encodeURIComponent(project.usefulness)}&domain=${encodeURIComponent(project.domain)}`}
+                  href={`/pitch?title=${encodeURIComponent(project.title)}&problem=${encodeURIComponent(project.problem)}&usefulness=${encodeURIComponent(project.problem_statement || '')}&domain=${encodeURIComponent(project.domain || '')}`}
                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
                 >
                   <MessageSquare className="w-4 h-4 text-primary" />
                   Regenerate Pitch
                 </Link>
                 <Link 
-                  href={`/structure?title=${encodeURIComponent(project.title)}&problem=${encodeURIComponent(project.problem)}&usefulness=${encodeURIComponent(project.usefulness)}&domain=${encodeURIComponent(project.domain)}`}
+                  href={`/structure?title=${encodeURIComponent(project.title)}&problem=${encodeURIComponent(project.problem)}&usefulness=${encodeURIComponent(project.problem_statement || '')}&domain=${encodeURIComponent(project.domain || '')}`}
                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
                 >
                   <GitBranch className="w-4 h-4 text-primary" />

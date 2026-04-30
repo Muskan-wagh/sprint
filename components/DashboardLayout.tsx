@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Lightbulb, 
-  GitBranch, 
-  MessageSquare, 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Lightbulb,
+  GitBranch,
+  MessageSquare,
   Plus,
   Settings,
-  HelpCircle
-} from 'lucide-react';
+  HelpCircle,
+} from "lucide-react";
 
 const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/idea', label: 'Ideas', icon: Lightbulb },
-  { href: '/structure', label: 'Structure', icon: GitBranch },
-  { href: '/pitch', label: 'Pitch', icon: MessageSquare },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/idea", label: "Ideas", icon: Lightbulb },
+  { href: "/structure", label: "Structure", icon: GitBranch },
+  { href: "/pitch", label: "Pitch", icon: MessageSquare },
 ];
 
 const bottomItems = [
-  { href: '#', label: 'New Project', icon: Plus },
-  { href: '#', label: 'Settings', icon: Settings },
-  { href: '#', label: 'Help', icon: HelpCircle },
+  { href: "#", label: "New Project", icon: Plus },
+  { href: "#", label: "Settings", icon: Settings },
+  { href: "#", label: "Help", icon: HelpCircle },
 ];
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +38,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
               <div className="w-4 h-4 bg-white rounded-sm rotate-45" />
             </div>
-            <span className="text-lg font-bold text-gray-900 tracking-tight">Sanctuary AI</span>
+            <span className="text-lg font-bold text-gray-900 tracking-tight">
+              AI-new
+            </span>
           </Link>
         </div>
 
@@ -49,16 +51,17 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href || 
-              (item.href !== '/dashboard' && pathname.startsWith(item.href));
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/dashboard" && pathname.startsWith(item.href));
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-primary text-white shadow-md shadow-primary/20'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? "bg-primary text-white shadow-md shadow-primary/20"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -87,9 +90,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 min-h-screen">
-        {children}
-      </main>
+      <main className="ml-64 min-h-screen">{children}</main>
     </div>
   );
 }

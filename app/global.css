@@ -1,75 +1,81 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-accent-soft: var(--accent-soft);
-  --color-bg-soft: var(--bg-soft);
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-accent-soft: var(--accent-soft);
+    --color-bg-soft: var(--bg-soft);
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
 }
 
 :root {
-  /* Sanctuary AI Design System */
-  --primary: #059669; /* emerald-600 */
-  --primary-hover: #047857; /* emerald-700 */
-  --accent-soft: #ecfdf5; /* emerald-50 */
-  --text-main: #111827; /* gray-900 */
-  --text-muted: #4b5563; /* gray-600 */
-  --bg-soft: #f9fafb; /* gray-50 */
-  
-  --font-inter: "Inter", system-ui, sans-serif;
+    /* Sanctuary AI Design System */
+    --primary: #044434; /* emerald-600 */
+    --primary-hover: #047857; /* emerald-700 */
+    --accent-soft: #ecfdf5; /* emerald-50 */
+    --text-main: #111827; /* gray-900 */
+    --text-muted: #4b5563; /* gray-600 */
+    --bg-soft: #f9fafb; /* gray-50 */
+
+    --font-inter: "Inter", system-ui, sans-serif;
 }
 
 @layer base {
-  body {
-    @apply font-[var(--font-inter)] bg-white text-[var(--text-main)] antialiased;
-  }
+    body {
+        @apply font-[var(--font-inter)] bg-white text-[var(--text-main)] antialiased;
+    }
 }
 
 @layer components {
-  /* Reusable classes requested by user */
-  .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-full transition-all hover:bg-primary-hover hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
-  }
+    /* Reusable classes requested by user */
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-full transition-all hover:bg-primary-hover hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+    }
 
-  .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-full transition-all border border-gray-200 hover:bg-gray-50 hover:border-gray-300;
-  }
-  
-  .card {
-    @apply bg-white rounded-2xl p-6 border border-gray-100 shadow-sm transition-all hover:shadow-md;
-  }
-  
-  .section {
-    @apply py-24 px-6;
-  }
-  
-  .container {
-    @apply max-w-7xl mx-auto w-full px-4 sm:px-6;
-  }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-full transition-all border border-gray-200 hover:bg-gray-50 hover:border-gray-300;
+    }
 
-  /* Custom Prompt Sidebar Items */
-  .prompt-card {
-    @apply cursor-pointer p-4 rounded-xl border border-transparent transition-all hover:bg-accent-soft hover:border-emerald-100;
-  }
+    .card {
+        @apply bg-white rounded-2xl p-6 border border-gray-100 shadow-sm transition-all hover:shadow-md;
+    }
 
-  .prompt-card.active {
-    @apply bg-accent-soft border-emerald-200 shadow-sm;
-  }
+    .section {
+        @apply py-24 px-6;
+    }
 
-  /* Badge/Tag */
-  .badge-emerald {
-    @apply inline-flex items-center px-3 py-1 rounded-full bg-accent-soft text-primary font-medium text-sm;
-  }
+    .container {
+        @apply max-w-7xl mx-auto w-full px-4 sm:px-6;
+    }
+
+    /* Custom Prompt Sidebar Items */
+    .prompt-card {
+        @apply cursor-pointer p-4 rounded-xl border border-transparent transition-all hover:bg-accent-soft hover:border-emerald-100;
+    }
+
+    .prompt-card.active {
+        @apply bg-accent-soft border-emerald-200 shadow-sm;
+    }
+
+    /* Badge/Tag */
+    .badge-emerald {
+        @apply inline-flex items-center px-3 py-1 rounded-full bg-accent-soft text-primary font-medium text-sm;
+    }
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.6s ease-out forwards;
 }

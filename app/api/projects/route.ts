@@ -18,9 +18,12 @@ export async function GET() {
 
     const formattedProjects = (projects || []).map((p: any) => ({
       ...p,
+      problem: p.idea || p.problem_statement || '',
+      usefulness: p.usefulness || '',
       features: p.features ? JSON.parse(p.features) : [],
       tech_stack: p.tech_stack ? JSON.parse(p.tech_stack) : [],
       roadmap: p.roadmap ? JSON.parse(p.roadmap) : [],
+      pitch_script: p.pitch || '',
     }));
 
     return NextResponse.json({ projects: formattedProjects });
