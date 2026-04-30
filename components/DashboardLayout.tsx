@@ -39,7 +39,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <div className="w-4 h-4 bg-white rounded-sm rotate-45" />
             </div>
             <span className="text-lg font-bold text-gray-900 tracking-tight">
-              AI-new
+              Structify
             </span>
           </Link>
         </div>

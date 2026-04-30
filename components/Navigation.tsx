@@ -17,7 +17,7 @@ export function Navigation() {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <div className="w-4 h-4 bg-white rounded-sm rotate-45" />
           </div>
-          AI-new
+          Structify
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
