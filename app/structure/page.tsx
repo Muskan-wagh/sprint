@@ -66,24 +66,25 @@ function StructureContent() {
   }
 
   return (
-    <div className="p-8">
-      <header className="mb-8 animate-fade-in">
-        <div className="flex items-center gap-2 mb-4">
-          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-primary flex items-center gap-1">
-            <Home className="w-4 h-4" />
-            Dashboard
+    <div className="p-3 md:p-8">
+      <header className="mb-6 md:mb-8 animate-fade-in">
+        <div className="flex items-center gap-2 mb-3 md:mb-4">
+          <Link href="/dashboard" className="text-xs md:text-sm text-gray-500 hover:text-primary flex items-center gap-1">
+            <Home className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden sm:inline">Dashboard</span>
+            <span className="sm:hidden">Home</span>
           </Link>
-          <span className="text-gray-300">/</span>
-          <Link href="/idea" className="text-sm text-gray-500 hover:text-primary">Ideas</Link>
-          <span className="text-gray-300">/</span>
-          <span className="text-sm font-medium text-gray-900">Structure</span>
+          <span className="text-gray-300 text-xs">/</span>
+          <Link href="/idea" className="text-xs md:text-sm text-gray-500 hover:text-primary">Ideas</Link>
+          <span className="text-gray-300 text-xs">/</span>
+          <span className="text-xs md:text-sm font-medium text-gray-900">Structure</span>
         </div>
-        <div className="badge-emerald mb-4">Structure Builder</div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Build your project architecture.</h1>
-        <p className="text-gray-500 text-lg">Define features, tech stack, and roadmap for your startup.</p>
+        <div className="badge-emerald mb-3 md:mb-4 text-xs">Structure Builder</div>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 md:mb-2">Build your project architecture.</h1>
+        <p className="text-sm md:text-base text-gray-500">Define features, tech stack, and roadmap for your startup.</p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Sidebar: Selected Idea */}
         <aside className="lg:col-span-1 space-y-6 animate-fade-in stagger-1">
           <div className="card !p-0 overflow-hidden sticky top-28">

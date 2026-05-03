@@ -94,7 +94,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Mobile Header */}
-      <header className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-40 flex items-center justify-between px-4">
+      <header className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 z-40 flex items-center justify-between px-4">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <div className="w-3 h-3 bg-white rounded-sm rotate-45" />
@@ -193,8 +193,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </nav>
 
       {/* Main Content - with responsive margin */}
-      <main className="md:ml-64 min-h-screen pt-16 md:pt-0 pb-20 md:pb-0">
-        <div className="p-4 md:p-8">{children}</div>
+      <main className="md:ml-64 min-h-screen pt-12 md:pt-0 pb-20 md:pb-0">
+        <div className="p-3 md:p-8">{children}</div>
       </main>
     </div>
   );

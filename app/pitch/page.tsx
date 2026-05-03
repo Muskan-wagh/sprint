@@ -83,26 +83,27 @@ function PitchContent() {
   }
 
   return (
-    <div className="p-8">
-      <header className="mb-8 animate-fade-in">
-        <div className="flex items-center gap-2 mb-4">
-          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-primary flex items-center gap-1">
-            <Home className="w-4 h-4" />
-            Dashboard
+    <div className="p-3 md:p-8">
+      <header className="mb-6 md:mb-8 animate-fade-in">
+        <div className="flex items-center gap-2 mb-3 md:mb-4">
+          <Link href="/dashboard" className="text-xs md:text-sm text-gray-500 hover:text-primary flex items-center gap-1">
+            <Home className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden sm:inline">Dashboard</span>
+            <span className="sm:hidden">Home</span>
           </Link>
-          <span className="text-gray-300">/</span>
-          <Link href="/idea" className="text-sm text-gray-500 hover:text-primary">Ideas</Link>
-          <span className="text-gray-300">/</span>
-          <Link href="/structure" className="text-sm text-gray-500 hover:text-primary">Structure</Link>
-          <span className="text-gray-300">/</span>
-          <span className="text-sm font-medium text-gray-900">Pitch</span>
+          <span className="text-gray-300 text-xs">/</span>
+          <Link href="/idea" className="text-xs md:text-sm text-gray-500 hover:text-primary">Ideas</Link>
+          <span className="text-gray-300 text-xs">/</span>
+          <Link href="/structure" className="text-xs md:text-sm text-gray-500 hover:text-primary">Structure</Link>
+          <span className="text-gray-300 text-xs">/</span>
+          <span className="text-xs md:text-sm font-medium text-gray-900">Pitch</span>
         </div>
-        <div className="badge-emerald mb-4">Pitch Generator</div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Create your pitch script.</h1>
-        <p className="text-gray-500 text-lg">Generate a compelling 60-second pitch for investors.</p>
+        <div className="badge-emerald mb-3 md:mb-4 text-xs">Pitch Generator</div>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 md:mb-2">Create your pitch script.</h1>
+        <p className="text-sm md:text-base text-gray-500">Generate a compelling 60-second pitch for investors.</p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Sidebar: Project Summary */}
         <aside className="lg:col-span-1 space-y-6 animate-fade-in stagger-1">
           <div className="card !p-0 overflow-hidden sticky top-28">

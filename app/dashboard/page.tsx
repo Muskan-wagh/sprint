@@ -38,58 +38,58 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-4 md:p-8">
+      <div className="p-3 md:p-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 md:mb-8 gap-3 md:gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-3">
-              <LayoutDashboard className="w-7 h-7 md:w-8 md:h-8 text-primary" />
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
+              <LayoutDashboard className="w-5 h-5 md:w-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-primary" />
               <span className="hidden sm:inline">Dashboard</span>
               <span className="sm:hidden">Dashboard</span>
             </h1>
-            <p className="text-gray-500 mt-1 text-sm md:text-base">Manage your projects and ideas</p>
+            <p className="text-xs md:text-sm text-gray-500 mt-0.5 md:mt-1">Manage your projects and ideas</p>
           </div>
-          <Link href="/idea" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
-            <Plus className="w-5 h-5" />
+          <Link href="/idea" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center text-sm md:text-base py-2 md:py-3">
+            <Plus className="w-4 h-4 md:w-5 md:h-5" />
             <span className="sm:hidden">New</span>
             <span className="hidden sm:inline">New Project</span>
           </Link>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-          <div className="card p-4 md:p-6">
-            <div className="flex items-center gap-3 md:gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <LayoutDashboard className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mb-4 md:mb-8">
+          <div className="card p-3 md:p-6">
+            <div className="flex items-center gap-2 md:gap-4">
+              <div className="w-8 h-8 md:w-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-primary/10 flex items-center justify-center">
+                <LayoutDashboard className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-primary" />
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">Total Projects</p>
-                <p className="text-2xl md:text-3xl font-bold text-gray-900">{projects.length}</p>
+                <p className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">{projects.length}</p>
               </div>
             </div>
           </div>
-          <div className="card p-4 md:p-6">
-            <div className="flex items-center gap-3 md:gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <Tag className="w-5 h-5 md:w-6 md:h-6 text-emerald-600" />
+          <div className="card p-3 md:p-6">
+            <div className="flex items-center gap-2 md:gap-4">
+              <div className="w-8 h-8 md:w-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-emerald-100 flex items-center justify-center">
+                <Tag className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-emerald-600" />
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">Unique Domains</p>
-                <p className="text-2xl md:text-3xl font-bold text-gray-900">
+                <p className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">
                   {new Set(projects.map(p => p.domain)).size}
                 </p>
               </div>
             </div>
           </div>
-          <div className="card p-4 md:p-6 sm:col-span-2 md:col-auto">
-            <div className="flex items-center gap-3 md:gap-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Calendar className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+          <div className="card p-3 md:p-6 sm:col-span-2 md:col-auto">
+            <div className="flex items-center gap-2 md:gap-4">
+              <div className="w-8 h-8 md:w-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-blue-100 flex items-center justify-center">
+                <Calendar className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-blue-600" />
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">This Month</p>
-                <p className="text-2xl md:text-3xl font-bold text-gray-900">
+                <p className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">
                   {projects.filter(p => {
                     const created = new Date(p.created_at);
                     const now = new Date();
@@ -102,8 +102,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Projects Grid */}
-        <div className="space-y-4">
-          <h2 className="text-lg md:text-xl font-bold text-gray-900">Your Projects</h2>
+        <div className="space-y-3 md:space-y-4">
+          <h2 className="text-base md:text-xl font-bold text-gray-900">Your Projects</h2>
 
           {loading ? (
             <div className="card p-8 md:p-12 text-center">
